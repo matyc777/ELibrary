@@ -48,8 +48,8 @@ public class BookDao implements IBookDao {
     @Override
     public List<Book> getAll() {
         List<Book> books = new ArrayList<>();
-        for (String bookReaderId : properties.stringPropertyNames()) {
-            books.add(getById(Integer.parseInt(bookReaderId)));
+        for (String bookLeaserId : properties.stringPropertyNames()) {
+            books.add(getById(ParseUtil.tryParse(bookLeaserId)));
         }
         return books;
     }

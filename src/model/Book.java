@@ -4,13 +4,13 @@ public class Book {
     private Integer id;
     private String name;
     private String author;
-    private Integer bookReaderId;
+    private Integer bookLeaserId;
 
-    public Book(Integer id, String name, String author, Integer bookReaderId) {
+    public Book(Integer id, String name, String author, Integer bookLeaserId) {
         this.id = id;
         this.name = name;
         this.author = author;
-        this.bookReaderId = bookReaderId;
+        this.bookLeaserId = bookLeaserId;
     }
 
     public Integer getId() {
@@ -37,16 +37,16 @@ public class Book {
         this.author = author;
     }
 
-    public Integer getBookReaderId() {
-        return bookReaderId;
+    public Integer getBookLeaserId() {
+        return bookLeaserId;
     }
 
-    public void setBookReaderId(Integer bookReaderId) {
-        this.bookReaderId = bookReaderId;
+    public void setBookLeaserId(Integer bookLeaserId) {
+        this.bookLeaserId = bookLeaserId;
     }
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%d", name, author, bookReaderId);
+        return String.format("%s,%s,%d", name, author, bookLeaserId);
     }
 }

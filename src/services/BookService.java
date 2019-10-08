@@ -2,6 +2,7 @@ package services;
 
 import dao.BookDao;
 import dao.api.IBookDao;
+import exceptions.NotExistException;
 import model.Book;
 import services.api.IBookService;
 
@@ -16,8 +17,10 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void updateBookInfo(Book book) {
-        bookDao.update(book);
+    public void updateBookInfo(Book book) throws NotExistException {
+        if (!bookDao.update(book)) {
+            throw new NotExistException(String.format("Book with id: %d does not exist", book.getId()));
+        }
     }
 
     @Override
@@ -26,8 +29,13 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Book getById(Integer id) {
-        return bookDao.getById(id);
+    public Book getById(Integer id) throws NotExistException {
+        Book book = bookDao.getById(id);
+        if (book == null) {
+            throw new NotExistException("Book with specified id does not exist");
+        } else {
+            return book;
+        }
     }
 
     @Override
@@ -37,11 +45,11 @@ public class BookService implements IBookService {
 
     @Override
     public List<Book> getAllFreeBooks() {
-        return bookDao.getAll().stream().filter(x -> x.getBookReaderId() == null).collect(Collectors.toList());
+        return bookDao.getAll().stream().filter(x -> x.getBookLeaserId() == null).collect(Collectors.toList());
     }
 
     @Override
     public List<Book> getAllLeasedBooks() {
-        return bookDao.getAll().stream().filter(x -> x.getBookReaderId() != null).collect(Collectors.toList());
+        return bookDao.getAll().stream().filter(x -> x.getBookLeaserId() != null).collect(Collectors.toList());
     }
 }

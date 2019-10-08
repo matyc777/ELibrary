@@ -1,6 +1,6 @@
 package model;
 
-public class BookReader {
+public class BookLeaser {
     private Integer id;
     private String name;
     private String phoneNumber;
@@ -10,7 +10,7 @@ public class BookReader {
         return String.format("%s,%s", name, phoneNumber);
     }
 
-    public BookReader(Integer id, String name, String phoneNumber) {
+    public BookLeaser(Integer id, String name, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
